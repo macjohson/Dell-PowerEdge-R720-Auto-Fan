@@ -58,14 +58,6 @@ func parseOutput(output string) []SensorData {
 
 		label := strings.TrimSpace(fields[0])
 
-		if label == "Inlet Temp" {
-			label = "进风口"
-		}
-
-		if label == "Exhaust Temp" {
-			label = "出风口"
-		}
-
 		if label == "Temp" {
 			cpu += 1
 			label = fmt.Sprintf("CPU%d", cpu)

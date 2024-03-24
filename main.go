@@ -14,11 +14,10 @@ func main() {
 		// 获取温度数据
 		sensorData, err := utils.GetTemp()
 		if err != nil {
-			fmt.Println("获取温度数据失败:", err)
+			fmt.Println("get temp fail:", err)
 			continue
 		}
 
-		fmt.Print("\033[H\033[2J")
 		temps := make([]int, 0)
 		// 打印结果
 		for _, data := range sensorData {
@@ -26,7 +25,7 @@ func main() {
 			temps = append(temps, data.Temp)
 		}
 
-		fmt.Printf("当前转速%d%%", last)
+		fmt.Printf("Fan Speed: %d%%", last)
 
 		maxTemp := slices.Max(temps)
 
