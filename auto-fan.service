@@ -1,0 +1,13 @@
+[Unit]
+Description=auto-fan
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/auto-fan
+Restart=always
+User=root
+Group=root
+Environment=PATH=/usr/bin/
+
+[Install]
+WantedBy=multi-user.target

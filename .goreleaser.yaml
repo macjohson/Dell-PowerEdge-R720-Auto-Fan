@@ -20,6 +20,18 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
+    binary: "auto-fan"
+
+nfpms:
+  - package_name: auto-fan
+    formats: 
+      - deb
+    dependencies:
+      - ipmitool
+    contents:
+      - dst: /usr/lib/systemd/system/auto-fan.service
+        src: ./auto-fan.service
+
 
 archives:
   - format: tar.gz
