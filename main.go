@@ -25,7 +25,7 @@ func main() {
 			temps = append(temps, data.Temp)
 		}
 
-		fmt.Printf("Fan Speed: %d%%", last)
+		fmt.Printf("Fan Speed: %d%%\n\n", last)
 
 		maxTemp := slices.Max(temps)
 
