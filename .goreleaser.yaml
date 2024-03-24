@@ -24,6 +24,7 @@ builds:
 
 nfpms:
   - package_name: auto-fan
+    maintainer: macjohson@live.com
     formats: 
       - deb
     dependencies:
