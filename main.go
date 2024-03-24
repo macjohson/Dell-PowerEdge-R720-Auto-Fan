@@ -30,12 +30,12 @@ func main() {
 
 		maxTemp := slices.Max(temps)
 
-		fanSpeed := 15
+		fanSpeed := 10
 
-		limitTemp := 45
+		limitTemp := 40
 
 		if maxTemp > limitTemp {
-			fanSpeed = (maxTemp-limitTemp)*2 + fanSpeed
+			fanSpeed = (maxTemp-limitTemp)*2 + 15
 			if fanSpeed > 100 {
 				fanSpeed = 100
 			}
