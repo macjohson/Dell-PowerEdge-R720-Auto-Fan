@@ -70,14 +70,8 @@ func main() {
 
 		fmt.Printf("Fan Speed: %d%%\n\n\n", fanSpeed)
 
-		sleep := time.Duration(2)
-
-		if fanSpeed > last {
-			sleep = time.Duration(10)
-		}
-
 		last = fanSpeed
 
-		time.Sleep(time.Second * sleep)
+		time.Sleep(time.Second * 2)
 	}
 }
