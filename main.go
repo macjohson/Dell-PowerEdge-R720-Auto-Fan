@@ -51,8 +51,6 @@ func main() {
 			temps = append(temps, data.Temp)
 		}
 
-		fmt.Printf("Fan Speed: %d%%\n\n\n", last)
-
 		maxTemp := slices.Max(temps)
 
 		fanSpeed := config.Base
@@ -69,6 +67,8 @@ func main() {
 		if last != fanSpeed {
 			utils.SetFan(fanSpeed)
 		}
+
+		fmt.Printf("Fan Speed: %d%%\n\n\n", fanSpeed)
 
 		last = fanSpeed
 
