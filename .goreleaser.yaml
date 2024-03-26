@@ -32,6 +32,8 @@ nfpms:
     contents:
       - dst: /usr/lib/systemd/system/auto-fan.service
         src: ./auto-fan.service
+      - dst: /etc/auto-fan/config.yaml
+        src: ./etc/config.yaml
 
 
 archives:

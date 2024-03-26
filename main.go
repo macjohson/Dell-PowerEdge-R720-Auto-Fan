@@ -3,13 +3,39 @@ package main
 import (
 	"auto-fan/utils"
 	"fmt"
+	"os"
 	"slices"
 	"time"
+
+	"gopkg.in/yaml.v3"
 )
 
 var last int = 0
 
+type (
+	COnfig struct {
+		Limit  int `yaml:"limit"`
+		Base   int `yaml:"base"`
+		Offset int `yaml:"offset"`
+	}
+)
+
 func main() {
+
+	file, err := os.ReadFile("/etc/auto-fan/config.yaml")
+
+	if err != nil {
+		panic(err)
+	}
+
+	config := &COnfig{}
+
+	err = yaml.Unmarshal(file, config)
+
+	if err != nil {
+		panic(err)
+	}
+
 	for {
 		// 获取温度数据
 		sensorData, err := utils.GetTemp()
@@ -25,16 +51,16 @@ func main() {
 			temps = append(temps, data.Temp)
 		}
 
-		fmt.Printf("Fan Speed: %d%%\n\n", last)
+		fmt.Printf("Fan Speed: %d%%\n\n\n", last)
 
 		maxTemp := slices.Max(temps)
 
-		fanSpeed := 10
+		fanSpeed := config.Base
 
-		limitTemp := 40
+		limitTemp := config.Limit
 
 		if maxTemp > limitTemp {
-			fanSpeed = (maxTemp-limitTemp)*2 + 10
+			fanSpeed = (maxTemp-limitTemp)*config.Offset + config.Base
 			if fanSpeed > 100 {
 				fanSpeed = 100
 			}
