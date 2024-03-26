@@ -34,7 +34,7 @@ func main() {
 		limitTemp := 40
 
 		if maxTemp > limitTemp {
-			fanSpeed = (maxTemp-limitTemp)*2 + 15
+			fanSpeed = (maxTemp-limitTemp)*2 + 10
 			if fanSpeed > 100 {
 				fanSpeed = 100
 			}
