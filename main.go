@@ -13,7 +13,7 @@ import (
 var last int = 0
 
 type (
-	COnfig struct {
+	Config struct {
 		Limit  int `yaml:"limit"`
 		Base   int `yaml:"base"`
 		Offset int `yaml:"offset"`
@@ -22,21 +22,21 @@ type (
 
 func main() {
 
-	file, err := os.ReadFile("/etc/auto-fan/config.yaml")
-
-	if err != nil {
-		panic(err)
-	}
-
-	config := &COnfig{}
-
-	err = yaml.Unmarshal(file, config)
-
-	if err != nil {
-		panic(err)
-	}
-
 	for {
+		file, err := os.ReadFile("/etc/auto-fan/config.yaml")
+
+		if err != nil {
+			panic(err)
+		}
+
+		config := &Config{}
+
+		err = yaml.Unmarshal(file, config)
+
+		if err != nil {
+			panic(err)
+		}
+
 		// 获取温度数据
 		sensorData, err := utils.GetTemp()
 		if err != nil {
@@ -72,6 +72,6 @@ func main() {
 
 		last = fanSpeed
 
-		time.Sleep(time.Second * 1)
+		time.Sleep(time.Second * 2)
 	}
 }
