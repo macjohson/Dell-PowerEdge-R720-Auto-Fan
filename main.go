@@ -40,11 +40,14 @@ func main() {
 			panic(err)
 		}
 
-		if !config.Auto && !manual {
-			utils.SetManual()
-			manual = true
+		if !config.Auto {
 
-			fmt.Println("NOW IS MANUAL")
+			if !manual {
+				utils.SetManual()
+				manual = true
+
+				fmt.Println("NOW IS MANUAL")
+			}
 
 			time.Sleep(time.Second * 2)
 			continue
