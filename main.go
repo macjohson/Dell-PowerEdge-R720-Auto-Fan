@@ -12,11 +12,14 @@ import (
 
 var last int = 0
 
+var manual = false
+
 type (
 	Config struct {
-		Limit  int `yaml:"limit"`
-		Base   int `yaml:"base"`
-		Offset int `yaml:"offset"`
+		Limit  int  `yaml:"limit"`
+		Base   int  `yaml:"base"`
+		Offset int  `yaml:"offset"`
+		Auto   bool `yaml:"auto"`
 	}
 )
 
@@ -36,6 +39,14 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+
+		if !config.Auto && !manual {
+			utils.SetManual()
+			manual = true
+			continue
+		}
+
+		manual = false
 
 		// 获取温度数据
 		sensorData, err := utils.GetTemp()

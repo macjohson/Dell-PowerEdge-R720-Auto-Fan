@@ -18,3 +18,17 @@ func SetFan(percent int) {
 		fmt.Println(err)
 	}
 }
+
+func SetManual() {
+	err := exec.Command("ipmitool", "raw", "0x30", "0x30", "0x01", "0x00").Run()
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = exec.Command("ipmitool", "raw", "0x30", "0x30", "0x01", "0x01").Run()
+
+	if err != nil {
+		fmt.Println(err)
+	}
+}

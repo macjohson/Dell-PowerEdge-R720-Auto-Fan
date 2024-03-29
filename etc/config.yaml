@@ -1,3 +1,4 @@
 limit: 45
 base: 15
 offset: 10
+auto: false
