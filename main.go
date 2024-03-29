@@ -43,6 +43,10 @@ func main() {
 		if !config.Auto && !manual {
 			utils.SetManual()
 			manual = true
+
+			fmt.Println("NOW IS MANUAL")
+
+			time.Sleep(time.Second * 2)
 			continue
 		}
 
