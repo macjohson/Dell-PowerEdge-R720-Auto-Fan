@@ -16,10 +16,14 @@ var manual = false
 
 type (
 	Config struct {
-		Limit  int  `yaml:"limit"`
-		Base   int  `yaml:"base"`
-		Offset int  `yaml:"offset"`
-		Auto   bool `yaml:"auto"`
+		Limit      int    `yaml:"limit"`
+		Base       int    `yaml:"base"`
+		Offset     int    `yaml:"offset"`
+		Auto       bool   `yaml:"auto"`
+		LoopSecond int    `yaml:"loop_second"`
+		Username   string `yaml:"username"`
+		Password   string `yaml:"password"`
+		IP         string `yaml:"ip"`
 	}
 )
 
@@ -40,23 +44,29 @@ func main() {
 			panic(err)
 		}
 
+		account := &utils.Account{
+			Username: config.Username,
+			Password: config.Password,
+			IP:       config.IP,
+		}
+
 		if !config.Auto {
 
 			if !manual {
-				utils.SetManual()
+				utils.SetManual(account)
 				manual = true
 
 				fmt.Println("NOW IS MANUAL")
 			}
 
-			time.Sleep(time.Second * 2)
+			time.Sleep(time.Second * time.Duration(config.LoopSecond))
 			continue
 		}
 
 		manual = false
 
 		// 获取温度数据
-		sensorData, err := utils.GetTemp()
+		sensorData, err := utils.GetTemp(account)
 		if err != nil {
 			fmt.Println("get temp fail:", err)
 			continue
@@ -83,13 +93,13 @@ func main() {
 		}
 
 		if last != fanSpeed {
-			utils.SetFan(fanSpeed)
+			utils.SetFan(fanSpeed, account)
 		}
 
 		fmt.Printf("Fan Speed: %d%%\n\n\n", fanSpeed)
 
 		last = fanSpeed
 
-		time.Sleep(time.Second * 2)
+		time.Sleep(time.Duration(config.LoopSecond))
 	}
 }

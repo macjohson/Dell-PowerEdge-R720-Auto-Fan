@@ -1,4 +1,8 @@
-limit: 45
+limit: 45 #当温度超过此值则会在base基础上进行递增[offset]/℃
 base: 15
 offset: 10
-auto: false
+auto: true
+loop_second: 2
+username: root
+password: ljl5551112
+ip: 192.168.31.111

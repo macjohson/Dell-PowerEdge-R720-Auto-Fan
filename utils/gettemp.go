@@ -15,9 +15,12 @@ type SensorData struct {
 	Temp   int
 }
 
-func GetTemp() ([]SensorData, error) {
+func GetTemp(account *Account) ([]SensorData, error) {
+	args := account.Command([]string{"sdr", "type", "temperature"})
 	// 执行 ipmitool 命令
-	cmd := exec.Command("ipmitool", "sdr", "type", "temperature")
+	cmd := exec.Command(args[0], args[1:]...)
+
+	fmt.Println(cmd.String())
 
 	// 捕获命令输出
 	output, err := cmd.Output()
